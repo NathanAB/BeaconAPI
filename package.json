@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "deploy": "git push heroku master; heroku open",
     "test": "jest"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/NathanAB/BeaconAPI#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-promise-router": "^3.0.3",
     "pg": "^7.12.0"
   }
 }
