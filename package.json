@@ -1,0 +1,24 @@
+{
+  "name": "beacon-api",
+  "version": "1.0.0",
+  "description": "Back-end API for the Beacon web app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanAB/BeaconAPI.git"
+  },
+  "author": "Nathan Bakirci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NathanAB/BeaconAPI/issues"
+  },
+  "homepage": "https://github.com/NathanAB/BeaconAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^7.12.0"
+  }
+}
