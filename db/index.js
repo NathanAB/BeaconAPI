@@ -1,6 +1,9 @@
-const { Client } = require('pg')
+const { Client } = require('pg');
 
-const dbConfig = require('./db-config.json');
+let dbConfig = {};
+try {
+  dbConfig = require('./db-config.json');
+} catch (e) {}
 
 const dbUrl = dbConfig.dbUrl || process.env.DATABASE_URL;
 
