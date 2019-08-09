@@ -19,8 +19,21 @@
   },
   "homepage": "https://github.com/NathanAB/BeaconAPI#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cookie-session": "^1.3.3",
     "express": "^4.17.1",
     "express-promise-router": "^3.0.3",
+    "express-session": "^1.16.2",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-oauth": "^1.0.0",
     "pg": "^7.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }

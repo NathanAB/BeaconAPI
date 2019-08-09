@@ -11,6 +11,6 @@ const client = new Client({
   connectionString: dbUrl,
   ssl: true,
 });
-client.connect()
+client.connect();
 
 module.exports = client;

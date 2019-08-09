@@ -60,5 +60,6 @@ typings/
 # next.js build output
 .next
 
-# db credentials
+# credentials
 db-config.json
+google-config.json
