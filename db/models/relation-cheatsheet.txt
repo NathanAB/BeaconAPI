@@ -1,0 +1,72 @@
+
+
+activities
+----------
+has many          sections                                 as sectionsActivityIdFkeys 
+belongs to many   spots                                    as spots 
+
+
+categories
+----------
+has many          tags                                     as tagsCategoryIdFkeys 
+
+
+dates
+-----
+has many          dates_sections                           as sectionsDateIdFkeys 
+has many          dates_users                              as usersDateIdFkeys 
+belongs to many   sections                                 as sections 
+belongs to many   users                                    as users 
+
+
+datesSections
+-------------
+belongs to        dates                                    as date 
+belongs to        sections                                 as section 
+
+
+datesUsers
+----------
+belongs to        dates                                    as date 
+belongs to        users                                    as user 
+
+
+neighborhoods
+-------------
+has many          spots                                    as spotsNeighborhoodIdFkeys 
+
+
+sections
+--------
+has many          dates_sections                           as datesSectionsSectionIdFkeys 
+has many          sections_tags                            as tagsSectionIdFkeys 
+belongs to        activities                               as activity 
+belongs to        spots                                    as spot 
+belongs to many   dates                                    as dates 
+belongs to many   tags                                     as tags 
+
+
+sectionsTags
+------------
+belongs to        sections                                 as section 
+belongs to        tags                                     as tag 
+
+
+spots
+-----
+has many          sections                                 as sectionsSpotIdFkeys 
+belongs to        neighborhoods                            as neighborhood 
+belongs to many   activities                               as activities 
+
+
+tags
+----
+has many          sections_tags                            as sectionsTagsTagIdFkeys 
+belongs to        categories                               as category 
+belongs to many   sections                                 as sections 
+
+
+users
+-----
+has many          dates_users                              as datesUsersUserIdFkeys 
+belongs to many   dates                                    as dates 

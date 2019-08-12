@@ -60,6 +60,7 @@ typings/
 # next.js build output
 .next
 
-# credentials
+# sensitive
 db-config.json
 google-config.json
+generate-models.sh

@@ -5,11 +5,9 @@ const googleConfig = require('./google-config');
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
-    console.log(user);
     done(null, user);
   });
   passport.deserializeUser((user, done) => {
-    console.log(user);
     done(null, user);
   });
   passport.use(new GoogleStrategy({
@@ -29,7 +27,7 @@ module.exports = (passport) => {
       locale: 'en'
     } */
     const profileData = profile._json; // eslint-disable-line no-underscore-dangle
-    db.userLogin(profileData);
+    db.getOrSetUser(profileData);
     done(null, {
       profile: profileData,
       token,
