@@ -54,8 +54,14 @@ const getOrSetUser = async ({ email, name, picture }) => {
 };
 
 const getAllDates = async () => {
-  const dates = await models.dates.findAll({ include: [{ all: true }] });
-  console.log(dates);
+  const dates = await models.dates.findAll({
+    include: [{
+      all: true,
+      include: [{
+        all: true,
+      }],
+    }],
+  });
   return dates;
 };
 

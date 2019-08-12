@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => sequelize.define('datesUsers', {
     allowNull: true,
     references: {
       model: 'dates',
-      key: 'date_id',
+      key: 'id',
     },
     onUpdate: 'NO ACTION',
     onDelete: 'NO ACTION',
@@ -50,9 +50,9 @@ module.exports = (sequelize, DataTypes) => sequelize.define('datesUsers', {
     field: 'start_time',
     allowNull: true,
   },
-  partner: {
-    type: DataTypes.STRING,
-    field: 'partner',
+  notes: {
+    type: DataTypes.TEXT,
+    field: ' notes',
     allowNull: true,
   },
 }, {

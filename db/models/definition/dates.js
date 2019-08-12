@@ -1,9 +1,9 @@
 /* eslint new-cap: "off", global-require: "off" */
 
 module.exports = (sequelize, DataTypes) => sequelize.define('dates', {
-  dateId: {
+  id: {
     type: DataTypes.INTEGER,
-    field: 'date_id',
+    field: 'id',
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => sequelize.define('dates', {
     field: 'updated_at',
     allowNull: true,
   },
-  dateName: {
+  name: {
     type: DataTypes.STRING,
-    field: 'date_name',
+    field: 'name',
     allowNull: true,
   },
-  dateDescription: {
+  description: {
     type: DataTypes.TEXT,
-    field: 'date_description',
+    field: 'description',
     allowNull: true,
   },
 }, {

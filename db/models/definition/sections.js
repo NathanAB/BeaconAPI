@@ -1,9 +1,9 @@
 /* eslint new-cap: "off", global-require: "off" */
 
 module.exports = (sequelize, DataTypes) => sequelize.define('sections', {
-  sectionId: {
+  id: {
     type: DataTypes.INTEGER,
-    field: 'section_id',
+    field: 'id',
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
@@ -45,14 +45,14 @@ module.exports = (sequelize, DataTypes) => sequelize.define('sections', {
     field: 'section_name',
     allowNull: true,
   },
-  minute: {
+  minutes: {
     type: DataTypes.INTEGER,
-    field: 'minute',
+    field: 'minutes',
     allowNull: true,
   },
-  price: {
+  cost: {
     type: DataTypes.INTEGER,
-    field: 'price',
+    field: 'cost',
     allowNull: true,
   },
   description: {

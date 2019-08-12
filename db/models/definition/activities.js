@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => sequelize.define('activities', {
     field: 'updated_at',
     allowNull: true,
   },
-  activityName: {
+  name: {
     type: DataTypes.STRING,
-    field: 'activity_name',
+    field: 'name',
     allowNull: true,
   },
 }, {

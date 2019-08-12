@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => sequelize.define('spots', {
     field: 'updated_at',
     allowNull: true,
   },
-  spotName: {
+  name: {
     type: DataTypes.STRING,
-    field: 'spot_name',
+    field: 'name',
     allowNull: true,
   },
-  spotLocation: {
+  location: {
     type: DataTypes.INTEGER,
-    field: 'spot_location',
+    field: 'location',
     allowNull: true,
   },
   neighborhoodId: {

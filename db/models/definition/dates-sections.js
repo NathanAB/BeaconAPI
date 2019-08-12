@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => sequelize.define('datesSections', {
     allowNull: true,
     references: {
       model: 'dates',
-      key: 'date_id',
+      key: 'id',
     },
     onUpdate: 'NO ACTION',
     onDelete: 'NO ACTION',
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => sequelize.define('datesSections', {
     allowNull: true,
     references: {
       model: 'sections',
-      key: 'section_id',
+      key: 'id',
     },
     onUpdate: 'NO ACTION',
     onDelete: 'NO ACTION',

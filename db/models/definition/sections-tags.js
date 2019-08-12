@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => sequelize.define('sectionsTags', {
     allowNull: true,
     references: {
       model: 'sections',
-      key: 'section_id',
+      key: 'id',
     },
     onUpdate: 'NO ACTION',
     onDelete: 'NO ACTION',

@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => sequelize.define('tags', {
     field: 'updated_at',
     allowNull: true,
   },
-  tagName: {
+  name: {
     type: DataTypes.STRING,
-    field: 'tag_name',
+    field: 'name',
     allowNull: true,
   },
   categoryId: {
