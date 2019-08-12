@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => sequelize.define('neighborhoods', {
     field: 'updated_at',
     allowNull: true,
   },
-  neighborhoodName: {
+  name: {
     type: DataTypes.STRING,
-    field: 'neighborhood_name',
+    field: 'name',
     allowNull: true,
   },
 }, {

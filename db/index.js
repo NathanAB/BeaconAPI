@@ -56,9 +56,18 @@ const getOrSetUser = async ({ email, name, picture }) => {
 const getAllDates = async () => {
   const dates = await models.dates.findAll({
     include: [{
-      all: true,
+      model: models.sections,
+      as: 'sections',
       include: [{
-        all: true,
+        model: models.tags,
+        as: 'tags',
+      }, {
+        model: models.spots,
+        as: 'spot',
+        include: [{
+          model: models.neighborhoods,
+          as: 'neighborhood',
+        }],
       }],
     }],
   });
