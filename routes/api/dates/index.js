@@ -1,6 +1,6 @@
 const Router = require('express-promise-router');
 
-const db = require('../../db');
+const db = require('../../../db');
 
 const router = new Router();
 
