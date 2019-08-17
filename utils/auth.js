@@ -7,7 +7,7 @@ try {
   // eslint-disable-next-line global-require
   googleConfig = require('./google-config');
 } catch (e) {
-  console.warning(e); // eslint-disable-line no-console
+  console.warn(e); // eslint-disable-line no-console
   googleConfig = {
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,

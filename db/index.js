@@ -5,7 +5,7 @@ try {
   const dbConfig = require('./db-config.json'); // eslint-disable-line global-require
   dbUrl = dbConfig.dbUrl; // eslint-disable-line prefer-destructuring
 } catch (e) {
-  console.warning(e); // eslint-disable-line no-console
+  console.warn(e); // eslint-disable-line no-console
   dbUrl = process.env.DATABASE_URL;
 }
 
