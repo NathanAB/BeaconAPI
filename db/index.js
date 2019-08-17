@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize');
 
-let dbConfig;
+let dbUrl;
 try {
-  // eslint-disable-next-line global-require
-  dbConfig = require('./db-config.json');
+  const dbConfig = require('./db-config.json'); // eslint-disable-line global-require
+  dbUrl = dbConfig.dbUrl; // eslint-disable-line prefer-destructuring
 } catch (e) {
-  console.error(e);
+  console.warning(e); // eslint-disable-line no-console
+  dbUrl = process.env.DATABASE_URL;
 }
 
 const models = require('./models');
 
-const dbUrl = dbConfig.dbUrl || process.env.DATABASE_URL;
 const sequelize = new Sequelize(dbUrl, {
   dialect: 'postgres',
   dialectOptions: {
