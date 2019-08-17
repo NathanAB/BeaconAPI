@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "generate-models": "cd scripts && sh ./generate-models.sh",
-    "deploy": "git push heroku master; heroku open",
+    "deploy": "git push heroku master",
     "test": "jest"
   },
   "repository": {
