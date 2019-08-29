@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 
 const initAuth = require('./utils/auth');
 const initRoutes = require('./routes');
@@ -23,6 +24,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://app.beacondates.com');
   next();
 });
+
+app.use(bodyParser.json());
 
 initRoutes(app);
 

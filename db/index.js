@@ -34,7 +34,7 @@ const getOrSetUser = async ({ email, name, picture }) => {
     throw new Error('Cannot login user - provided email is empty or null', email);
   }
 
-  await models.User.findOrCreate({
+  await models.users.findOrCreate({
     where: {
       email,
     },
@@ -42,7 +42,7 @@ const getOrSetUser = async ({ email, name, picture }) => {
       email,
     },
   });
-  await models.User.update({
+  await models.users.update({
     name,
     image_url: picture,
     last_login_at: sequelize.fn('NOW'),
@@ -74,7 +74,50 @@ const getAllDates = async () => {
   return dates;
 };
 
+const getAllTags = async () => {
+  const tags = await models.tags.findAll();
+  return tags;
+};
+
+const getAllNeighborhoods = async () => {
+  const tags = await models.neighborhoods.findAll();
+  return tags;
+};
+
+const getUserDates = async (email) => {
+  const { id } = await models.users.findOne({ where: { email } });
+  const userDates = await models.datesUsers.findAll({ where: { user_id: id } });
+  return userDates;
+};
+
+const createUserDate = async ({ email, userDate }) => {
+  const { id } = await models.users.findOne({ where: { email } });
+  return models.datesUsers.create({
+    userId: id,
+    dateId: userDate.dateId,
+    name: userDate.name,
+    notes: userDate.notes,
+    startTime: userDate.startTime,
+  });
+};
+
+const updateUserDate = async ({ email, userDate }) => {
+  const { id } = await models.users.findOne({ where: { email } });
+  return models.datesUsers.upsert({
+    id: userDate.id,
+    userId: id,
+    dateId: userDate.dateId,
+    name: userDate.name,
+    notes: userDate.notes,
+    startTime: userDate.startTime,
+  });
+};
+
 module.exports = {
   getOrSetUser,
   getAllDates,
+  getAllNeighborhoods,
+  getAllTags,
+  getUserDates,
+  createUserDate,
 };
