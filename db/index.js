@@ -103,13 +103,35 @@ const createUserDate = async ({ email, userDate }) => {
 
 const updateUserDate = async ({ email, userDate }) => {
   const { id } = await models.users.findOne({ where: { email } });
-  return models.datesUsers.upsert({
-    id: userDate.id,
-    userId: id,
-    dateId: userDate.dateId,
+  const { userId } = await models.datesUsers.findOne({ where: { id: userDate.id } });
+
+  if (userId !== id) {
+    throw Error('Unauthorized');
+  }
+
+  return models.datesUsers.update({
     name: userDate.name,
     notes: userDate.notes,
     startTime: userDate.startTime,
+  }, {
+    where: {
+      id: userDate.id,
+    },
+  });
+};
+
+const deleteUserDate = async ({ email, userDate }) => {
+  const { id } = await models.users.findOne({ where: { email } });
+  const { userId } = await models.datesUsers.findOne({ where: { id: userDate.id } });
+
+  if (userId !== id) {
+    throw Error('Unauthorized');
+  }
+
+  return models.datesUsers.destroy({
+    where: {
+      id: userDate.id,
+    },
   });
 };
 
@@ -120,4 +142,6 @@ module.exports = {
   getAllTags,
   getUserDates,
   createUserDate,
+  updateUserDate,
+  deleteUserDate,
 };

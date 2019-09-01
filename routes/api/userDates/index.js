@@ -67,4 +67,27 @@ router.patch('/', async (req, res) => {
   }
 });
 
+router.delete('/', async (req, res) => {
+  console.log('Deleting date:', req.body);
+  if (!req.session.token) {
+    res.cookie('token', '');
+    res.sendStatus(401);
+  }
+
+  if (!req.body || !req.body.dateId) {
+    res.sendStatus(400);
+  }
+
+  try {
+    const { email } = req.session.passport.user.profile;
+    const userDate = req.body;
+    const newDate = await db.deleteUserDate({ email, userDate });
+    res.status(200);
+    res.json(newDate);
+  } catch (err) {
+    res.sendStatus(500);
+    console.error(err);
+  }
+});
+
 module.exports = router;
