@@ -4,6 +4,7 @@ const router = new Router();
 
 router.get('/', (req, res) => {
   if (req.session.token) {
+    console.log(req.session);
     res.cookie('token', req.session.token);
     res.json(req.session.passport.user.profile);
   } else {
