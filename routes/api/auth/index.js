@@ -3,8 +3,8 @@ const Router = require('express-promise-router');
 const router = new Router();
 
 router.get('/', (req, res) => {
+  console.log('Session:', req.session);
   if (req.session.token) {
-    console.log(req.session);
     res.cookie('token', req.session.token);
     res.json(req.session.passport.user.profile);
   } else {
