@@ -80,8 +80,8 @@ const getAllTags = async () => {
 };
 
 const getAllNeighborhoods = async () => {
-  const tags = await models.neighborhoods.findAll();
-  return tags;
+  const neighborhoods = await models.neighborhoods.findAll();
+  return neighborhoods;
 };
 
 const getUserDates = async (email) => {

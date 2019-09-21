@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('neighborhoods', {
     field: 'name',
     allowNull: true,
   },
+  imageUrl: {
+    type: DataTypes.STRING,
+    field: 'imageUrl',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'neighborhoods',
