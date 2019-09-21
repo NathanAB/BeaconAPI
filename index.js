@@ -24,6 +24,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://app.beacondates.com');
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Accept, Accept-Language, Content-Language, Content-Type');
+  res.header('Access-Control-Allow-Methods', 'POST, PATCH, DELETE, GET, OPTIONS');
+
   next();
 });
 
