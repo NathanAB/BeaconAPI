@@ -5,6 +5,8 @@ const CONSTANTS = require('../../constants');
 
 const router = new Router();
 
+
+/* --- GOOGLE --- */
 router.get('/google', passport.authenticate('google', {
   scope: [
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -20,5 +22,21 @@ router.get('/google/callback',
     req.session.token = req.user.token;
     res.redirect(CONSTANTS.APP_URL);
   });
+
+
+/* --- FACEBOOK --- */
+router.get('/facebook', passport.authenticate('facebook', {
+  scope: ['public_profile', 'email'],
+}));
+
+router.get('/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: CONSTANTS.APP_URL, // TODO: Do something with failure
+  }),
+  (req, res) => {
+    req.session.token = req.user.token;
+    res.redirect(CONSTANTS.APP_URL);
+  });
+
 
 module.exports = router;

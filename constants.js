@@ -1,3 +1,3 @@
 module.exports = {
-  APP_URL: 'http://app.beacondates.com',
+  APP_URL: 'https://app.beacondates.com',
 };

@@ -63,4 +63,5 @@ typings/
 # sensitive
 db-config.json
 google-config.json
+facebook-config.json
 generate-models.sh
