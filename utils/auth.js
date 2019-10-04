@@ -1,9 +1,13 @@
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+
 const db = require('../db');
+const constants = require('../constants');
 
 let googleConfig;
 let facebookConfig;
+
+/* eslint-disable no-underscore-dangle, camelcase */
 
 try {
   // eslint-disable-next-line global-require
@@ -36,7 +40,7 @@ module.exports = (passport) => {
   passport.use(new GoogleStrategy({
     clientID: googleConfig.clientId,
     clientSecret: googleConfig.clientSecret,
-    callbackURL: '/login/google/callback',
+    callbackURL: `${constants.API_URL}/login/google/callback`,
   },
   (token, refreshToken, profile, done) => {
     /* EXAMPLE: profile._json: {
@@ -49,7 +53,7 @@ module.exports = (passport) => {
       email_verified: true,
       locale: 'en'
     } */
-    const profileData = profile._json; // eslint-disable-line no-underscore-dangle
+    const profileData = profile._json;
     db.getOrSetUser(profileData);
     done(null, {
       profile: profileData,
@@ -62,22 +66,29 @@ module.exports = (passport) => {
   passport.use(new FacebookStrategy({
     clientID: facebookConfig.clientId,
     clientSecret: facebookConfig.clientSecret,
-    callbackURL: '/login/facebook/callback',
+    callbackURL: `${constants.API_URL}/login/facebook/callback`,
+    profileFields: ['id', 'emails', 'name'],
   }, (token, refreshToken, profile, done) => {
-    /* EXAMPLE: profile._json: {
-      sub: '12345',
-      name: 'Guy Person',
-      given_name: 'Guy',
-      family_name: 'Person',
-      picture: 'https://somewhere.com/guy-person.jpg',
-      email: 'guyperson@gmail.com',
-      email_verified: true,
-      locale: 'en'
+    /* EXAMPLE: profile: {
+      id: '116503069752664',
+      name: {
+        familyName: 'Bakirci',
+        givenName: 'Nathan',
+      },
+      emails: [ { value: 'nathanb92@gmail.com' } ],
+      provider: 'facebook',
+      _json: {
+        id: '116503069752664',
+        email: 'nathanb92@gmail.com',
+        last_name: 'Bakirci',
+        first_name: 'Nathan'
+      }
     } */
-    const { id, name, emails } = profile;
-    console.log('Facebook user', id, name, emails);
+    const { first_name, last_name, email } = profile._json;
+    const profileData = { name: `${first_name} ${last_name}`, email };
+    db.getOrSetUser(profileData);
     done(null, {
-      profile,
+      profile: profileData,
       token,
     });
   }));

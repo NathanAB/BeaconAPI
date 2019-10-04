@@ -16,6 +16,7 @@ const sequelize = new Sequelize(dbUrl, {
   dialectOptions: {
     ssl: true,
   },
+  logging: false,
 });
 
 models.init(sequelize);
@@ -85,12 +86,14 @@ const getAllNeighborhoods = async () => {
 };
 
 const getUserDates = async (email) => {
+  console.log(new Date(), 'Getting user dates for', email);
   const { id } = await models.users.findOne({ where: { email } });
   const userDates = await models.datesUsers.findAll({ where: { user_id: id } });
   return userDates;
 };
 
 const createUserDate = async ({ email, userDate }) => {
+  console.log(new Date(), 'Creating user date for', email, userDate);
   const { id } = await models.users.findOne({ where: { email } });
   return models.datesUsers.create({
     userId: id,
@@ -102,6 +105,7 @@ const createUserDate = async ({ email, userDate }) => {
 };
 
 const updateUserDate = async ({ email, userDate }) => {
+  console.log(new Date(), 'Updating user date for', email, userDate);
   const { id } = await models.users.findOne({ where: { email } });
   const { userId } = await models.datesUsers.findOne({ where: { id: userDate.id } });
 
@@ -121,6 +125,7 @@ const updateUserDate = async ({ email, userDate }) => {
 };
 
 const deleteUserDate = async ({ email, userDate }) => {
+  console.log(new Date(), 'Deleting user date for', email, userDate);
   const { id } = await models.users.findOne({ where: { email } });
   const { userId } = await models.datesUsers.findOne({ where: { id: userDate.id } });
 
