@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('neighborhoods', {
     field: 'imageUrl',
     allowNull: true,
   },
+  disabled: {
+    type: DataTypes.BOOLEAN,
+    field: 'disabled',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'neighborhoods',
