@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('spots', {
     field: 'name',
     allowNull: true,
   },
+  placeId: {
+    type: DataTypes.STRING,
+    field: 'place_id',
+    allowNull: true,
+  },
   location: {
     type: DataTypes.INTEGER,
     field: 'location',
