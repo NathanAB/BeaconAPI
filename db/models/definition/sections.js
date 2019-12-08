@@ -70,6 +70,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('sections', {
     field: 'image',
     allowNull: true,
   },
+  imageAuthor: {
+    type: DataTypes.STRING,
+    field: 'imageAuthor',
+    allowNull: true,
+  },
   rating: {
     type: DataTypes.INTEGER,
     field: 'rating',
