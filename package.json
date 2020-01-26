@@ -8,6 +8,7 @@
     "start-dev": "NODE_ENV=dev node index.js",
     "generate-models": "cd scripts && sh ./generate-models.sh",
     "deploy": "git push heroku master",
+    "deploy-staging": "git push staging staging:master",
     "test": "jest"
   },
   "repository": {
