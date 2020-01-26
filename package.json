@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-dev": "NODE_ENV=dev node index.js",
+    "start-dev": "NODE_ENV=dev APP_ENV=local node index.js",
     "generate-models": "cd scripts && sh ./generate-models.sh",
-    "deploy": "git push heroku master",
-    "deploy-staging": "git push staging staging:master",
+    "deploy": "git push production master; heroku open --remote production",
+    "deploy-staging": "git push staging staging:master; heroku open --remote staging",
+    "migrate-staging-to-production": "heroku pg:copy beacon-dates-api-staging::DATABASE_URL DATABASE_URL --app beacon-dates-api",
+    "migrate-production-to-staging": "heroku pg:copy beacon-dates-api::DATABASE_URL DATABASE_URL --app beacon-dates-api-staging",
     "test": "jest"
   },
   "repository": {
