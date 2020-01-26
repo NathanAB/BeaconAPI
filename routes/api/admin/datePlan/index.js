@@ -5,15 +5,11 @@ const { ADMINS } = require('../utils');
 
 const router = new Router();
 
-router.put('/', async (req, res) => {
+router.post('/', async (req, res) => {
   console.log('Creating new date plan:', req.body);
   if (!req.session.token) {
     res.cookie('token', '');
     res.sendStatus(401);
-  }
-
-  if (!req.body || !req.body.name || !req.body.dateId || !req.body.startTime) {
-    res.sendStatus(400);
   }
 
   try {
@@ -24,8 +20,11 @@ router.put('/', async (req, res) => {
       console.error(`Non-admin ${email} is attempting to execute admin action`);
     }
 
-    const userDate = req.body;
-    const newDate = await db.createUserDate({ email, userDate });
+    if (!req.body || !req.body.name || !req.body.description) {
+      res.sendStatus(400);
+    }
+
+    const newDate = await db.createDatePlan({ date: req.body });
     res.status(201);
     res.json(newDate);
   } catch (err) {

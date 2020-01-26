@@ -104,6 +104,11 @@ const createUserDate = async ({ email, userDate }) => {
   });
 };
 
+const createDatePlan = async ({ date }) => {
+  console.log(new Date(), 'Creating new date plan named ', date.name);
+  return models.dates.create(date);
+};
+
 const updateUserDate = async ({ email, userDate }) => {
   console.log(new Date(), 'Updating user date for', email, userDate);
   const { id } = await models.users.findOne({ where: { email } });
@@ -149,4 +154,5 @@ module.exports = {
   createUserDate,
   updateUserDate,
   deleteUserDate,
+  createDatePlan,
 };
