@@ -1,5 +1,5 @@
 const productionConfig = {
-  APP_URL: 'https://app.beacondates.com',
+  APP_URL: 'https://www.beacondates.com',
   API_URL: 'https://api.beacondates.com',
 };
 
