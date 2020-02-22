@@ -10,6 +10,7 @@ try {
 }
 
 const models = require('./models');
+const adminOps = require('./adminOps');
 
 const sequelize = new Sequelize(dbUrl, {
   dialect: 'postgres',
@@ -80,6 +81,11 @@ const getAllTags = async () => {
   return tags;
 };
 
+const getAllActivities = async () => {
+  const activities = await models.activities.findAll();
+  return activities;
+};
+
 const getAllNeighborhoods = async () => {
   const neighborhoods = await models.neighborhoods.findAll();
   return neighborhoods;
@@ -102,11 +108,6 @@ const createUserDate = async ({ email, userDate }) => {
     notes: userDate.notes,
     startTime: userDate.startTime,
   });
-};
-
-const createDatePlan = async ({ date }) => {
-  console.log(new Date(), 'Creating new date plan named ', date.name);
-  return models.dates.create(date);
 };
 
 const updateUserDate = async ({ email, userDate }) => {
@@ -150,9 +151,10 @@ module.exports = {
   getAllDates,
   getAllNeighborhoods,
   getAllTags,
+  getAllActivities,
   getUserDates,
   createUserDate,
   updateUserDate,
   deleteUserDate,
-  createDatePlan,
+  ...adminOps,
 };
