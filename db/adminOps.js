@@ -5,6 +5,33 @@ const createDatePlan = async ({ date }) => {
   // return models.dates.create(date);
 };
 
+
+/*
+
+date: {
+  id,
+  name,
+  description,
+  sections: [
+    {
+      id,
+      spotId,
+      activityId,
+      minutes,
+      cost,
+      description,
+      tips,
+      image,
+      imageAuthor,
+      tags: [
+
+      ],
+    },
+  ].
+}
+
+*/
+
 const updateDatePlan = async ({ date }) => {
   console.log(new Date(), 'Updating date plan for', date.name);
 
@@ -17,20 +44,47 @@ const updateDatePlan = async ({ date }) => {
     },
   });
 
-  await Promise.all(date.sections.map(section => models.section.update({
-    spotId: section.spotId,
-    activityId: section.activityId,
-    minutes: section.minutes,
-    cost: section.cost,
-    description: section.description,
-    tips: section.tips,
-    image: section.tips,
-    imageAuthor: section.imageAuthor,
-  }, {
-    where: {
-      id: section.id,
-    },
-  })));
+  await Promise.all(date.sections.map(async (section) => {
+    // Update section top-level data
+    await models.sections.update({
+      minutes: section.minutes,
+      cost: section.cost,
+      description: section.description,
+      tips: section.tips,
+      image: section.image,
+      imageAuthor: section.imageAuthor,
+      activityId: section.activityId,
+    }, {
+      where: {
+        id: section.id,
+      },
+    });
+
+    // Update tags
+    const tagIds = section.tags.map(tag => tag.tagId);
+    await models.sectionsTags.destroy({
+      where: {
+        sectionId: section.id,
+      },
+    });
+    await Promise.all(tagIds.map(tagId => models.sectionsTags.create({
+      id: Math.round(Math.random() * 2147483646),
+      tagId,
+      sectionId: section.id,
+    })));
+
+
+    // Update spot data
+    await models.spots.update({
+      name: section.spot.name,
+      placeId: section.spot.placeId,
+      neighborhoodId: section.spot.neighborhoodId,
+    }, {
+      where: {
+        spotId: section.spot.spotId,
+      },
+    });
+  }));
 };
 
 module.exports = {
