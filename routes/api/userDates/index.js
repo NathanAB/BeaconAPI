@@ -7,8 +7,7 @@ const router = new Router();
 router.get('/', async (req, res) => {
   if (!req.session.token) {
     res.cookie('token', '');
-    res.sendStatus(401);
-    return;
+    return res.sendStatus(401);
   }
 
   try {

@@ -4,6 +4,7 @@ const { ADMINS } = require('./utils');
 
 const checkAdmin = (req, res, next) => {
   if (!req.session || !req.session.passport || !req.session.passport.user) {
+    console.error('Missing auth data attempting to execute admin action');
     return res.sendStatus(401);
   }
 
