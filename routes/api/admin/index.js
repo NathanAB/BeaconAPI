@@ -3,9 +3,10 @@ const datePlan = require('./datePlan');
 const { ADMINS } = require('./utils');
 
 const checkAdmin = (req, res, next) => {
-  if (!req.session) {
+  if (!req.session || !req.session.passport || !req.session.passport.user) {
     res.sendStatus(401);
   }
+
   const { email } = req.session.passport.user.profile;
 
   if (!ADMINS.includes(email)) {
