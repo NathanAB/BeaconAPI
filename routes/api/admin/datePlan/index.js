@@ -29,7 +29,7 @@ router.patch('/datePlan', async (req, res) => {
   console.log('Patching date plan:', req.body);
   try {
     if (!req.body || !req.body.name || !req.body.description) {
-      res.sendStatus(400);
+      return res.sendStatus(400);
     }
 
     await db.updateDatePlan({ date: req.body });

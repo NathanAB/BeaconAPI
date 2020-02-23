@@ -16,8 +16,8 @@ router.get('/', async (req, res) => {
     const userDates = await db.getUserDates(email);
     res.json(userDates);
   } catch (err) {
-    res.sendStatus(401);
     console.error(err);
+    return res.sendStatus(401);
   }
 });
 
@@ -25,11 +25,11 @@ router.post('/', async (req, res) => {
   console.log('Saving date:', req.body);
   if (!req.session.token) {
     res.cookie('token', '');
-    res.sendStatus(401);
+    return res.sendStatus(401);
   }
 
   if (!req.body || !req.body.name || !req.body.dateId || !req.body.startTime) {
-    res.sendStatus(400);
+    return res.sendStatus(400);
   }
 
   try {
@@ -39,8 +39,8 @@ router.post('/', async (req, res) => {
     res.status(201);
     res.json(newDate);
   } catch (err) {
-    res.sendStatus(500);
     console.error(err);
+    return res.sendStatus(500);
   }
 });
 
@@ -48,11 +48,11 @@ router.patch('/', async (req, res) => {
   console.log('Patching date:', req.body);
   if (!req.session.token) {
     res.cookie('token', '');
-    res.sendStatus(401);
+    return res.sendStatus(401);
   }
 
   if (!req.body || !req.body.id || !req.body.name || !req.body.dateId || !req.body.startTime) {
-    res.sendStatus(400);
+    return res.sendStatus(400);
   }
 
   try {
@@ -62,8 +62,8 @@ router.patch('/', async (req, res) => {
     res.status(200);
     res.json(newDate);
   } catch (err) {
-    res.sendStatus(500);
     console.error(err);
+    res.sendStatus(500);
   }
 });
 
@@ -71,11 +71,11 @@ router.delete('/', async (req, res) => {
   console.log('Deleting date:', req.body);
   if (!req.session.token) {
     res.cookie('token', '');
-    res.sendStatus(401);
+    return res.sendStatus(401);
   }
 
   if (!req.body || !req.body.dateId) {
-    res.sendStatus(400);
+    return res.sendStatus(400);
   }
 
   try {
@@ -85,8 +85,8 @@ router.delete('/', async (req, res) => {
     res.status(200);
     res.json(newDate);
   } catch (err) {
-    res.sendStatus(500);
     console.error(err);
+    res.sendStatus(500);
   }
 });
 
