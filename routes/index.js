@@ -1,5 +1,5 @@
 const dates = require('./api/dates');
-const adminRouter = require('./api/admin');
+const adminRouter = require('./api/admin/datePlan');
 const auth = require('./api/auth');
 const tags = require('./api/tags');
 const activities = require('./api/activities');
