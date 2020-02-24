@@ -1,6 +1,8 @@
-const express = require('express');
+const Router = require('express-promise-router');
 const datePlan = require('./datePlan');
 const { ADMINS } = require('./utils');
+
+const router = new Router();
 
 const checkAdmin = (req, res, next) => {
   if (!req.session || !req.session.passport || !req.session.passport.user) {
@@ -23,11 +25,7 @@ const checkAdmin = (req, res, next) => {
   next();
 };
 
-module.exports = {
-  createRouter: () => {
-    const router = express.Router();
-    router.use(checkAdmin);
-    router.use(datePlan);
-    return router;
-  },
-};
+router.use(checkAdmin);
+router.use(datePlan);
+
+module.exports = router;
