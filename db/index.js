@@ -156,5 +156,5 @@ module.exports = {
   createUserDate,
   updateUserDate,
   deleteUserDate,
-  ...adminOps,
+  ...adminOps(sequelize),
 };

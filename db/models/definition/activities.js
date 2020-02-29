@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => sequelize.define('activities', {
 }, {
   schema: 'public',
   tableName: 'activities',
-  timestamps: false,
 });
 
 module.exports.initRelations = () => {
