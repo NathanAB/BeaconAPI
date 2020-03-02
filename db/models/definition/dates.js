@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('dates', {
     field: 'description',
     allowNull: true,
   },
+  active: {
+    type: DataTypes.BOOLEAN,
+    field: 'active',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'dates',

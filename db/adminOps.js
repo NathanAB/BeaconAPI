@@ -60,6 +60,7 @@ module.exports = sequelize => ({
         id: genId(),
         name: date.name,
         description: date.description,
+        active: false,
       }, {
         transaction: t,
       });
@@ -115,6 +116,7 @@ module.exports = sequelize => ({
       await models.dates.update({
         name: date.name,
         description: date.description,
+        active: date.active,
       }, {
         where: {
           id: date.id,
