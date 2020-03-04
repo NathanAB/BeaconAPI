@@ -8,7 +8,8 @@
     "start-dev": "NODE_ENV=dev APP_ENV=local node index.js",
     "generate-models": "cd scripts && sh ./generate-models.sh",
     "deploy": "git push production master",
-    "deploy-staging": "git push staging admin-api:master",
+    "deploy-staging": "git push staging staging:master",
+    "deploy-current-branch-to-staging": "git push staging HEAD:master",
     "migrate-staging-to-production": "heroku pg:copy beacon-dates-api-staging::DATABASE_URL DATABASE_URL --app beacon-dates-api",
     "migrate-production-to-staging": "heroku pg:copy beacon-dates-api::DATABASE_URL DATABASE_URL --app beacon-dates-api-staging",
     "test": "jest"
