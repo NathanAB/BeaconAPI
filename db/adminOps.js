@@ -61,6 +61,7 @@ module.exports = sequelize => ({
         name: date.name,
         description: date.description,
         active: false,
+        new: false,
       }, {
         transaction: t,
       });
@@ -117,6 +118,7 @@ module.exports = sequelize => ({
         name: date.name,
         description: date.description,
         active: date.active,
+        new: date.new,
       }, {
         where: {
           id: date.id,

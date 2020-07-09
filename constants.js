@@ -10,7 +10,7 @@ const stagingConfig = {
 
 const localConfig = {
   APP_URL: 'http://local.beacondates.com:3000',
-  API_URL: 'http://local.beacondates.com:3000',
+  API_URL: 'http://local.beacondates.com:8080',
 };
 
 switch (process.env.APP_ENV) {
