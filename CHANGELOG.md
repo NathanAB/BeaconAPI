@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.3.0](https://github.com/nathanab/beaconapi/compare/v1.2.0...v1.3.0)
+- Add `sectionNumber` field to sections and order them by that value in date objects.
+
 ## [v1.2.0](https://github.com/nathanab/beaconapi/compare/v1.1.0...v1.2.0)
 - Add `new` field to dates
 

@@ -57,6 +57,10 @@ const getOrSetUser = async ({ email, name, picture }) => {
 
 const getAllDates = async () => {
   const dates = await models.dates.findAll({
+    order: [
+      // Make sure sections are in order
+      [{ model: models.sections, as: 'sections' }, 'sectionNumber', 'ASC'],
+    ],
     include: [{
       model: models.sections,
       as: 'sections',

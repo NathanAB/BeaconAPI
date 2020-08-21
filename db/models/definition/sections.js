@@ -80,6 +80,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('sections', {
     field: 'rating',
     allowNull: true,
   },
+  sectionNumber: {
+    type: DataTypes.INTEGER,
+    field: 'sectionNumber',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'sections',
