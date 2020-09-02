@@ -86,6 +86,7 @@ module.exports = sequelize => ({
           image: section.image,
           imageAuthor: section.imageAuthor,
           spotId: newSpot.spotId || newSpot.id,
+          sectionNumber: section.sectionNumber,
         }, {
           transaction: t,
         });
@@ -136,6 +137,7 @@ module.exports = sequelize => ({
           image: section.image,
           imageAuthor: section.imageAuthor,
           activityId: section.activityId,
+          sectionNumber: section.sectionNumber,
         }, {
           where: {
             id: section.id,
