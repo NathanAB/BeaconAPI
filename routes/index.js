@@ -5,6 +5,7 @@ const tags = require('./api/tags');
 const activities = require('./api/activities');
 const neighborhoods = require('./api/neighborhoods');
 const userDates = require('./api/userDates');
+const likedDates = require('./api/likedDates');
 const login = require('./login');
 const logout = require('./logout');
 
@@ -15,6 +16,7 @@ module.exports = (app) => {
   app.use('/api/activities', activities);
   app.use('/api/neighborhoods', neighborhoods);
   app.use('/api/userDates', userDates);
+  app.use('/api/likedDates', likedDates);
   app.use('/login', login);
   app.use('/logout', logout);
   app.use('/api/admin', adminRouter);

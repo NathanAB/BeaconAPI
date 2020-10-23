@@ -22,6 +22,7 @@ function init(sequelize) {
   model.spots = sequelize.import('./definition/spots.js');
   model.tags = sequelize.import('./definition/tags.js');
   model.users = sequelize.import('./definition/users.js');
+  model.likedDates = sequelize.import('./definition/liked-dates.js');
 
   // All models are initialized. Now connect them with relations.
   require('./definition/activities.js').initRelations();
@@ -35,6 +36,7 @@ function init(sequelize) {
   require('./definition/spots.js').initRelations();
   require('./definition/tags.js').initRelations();
   require('./definition/users.js').initRelations();
+  require('./definition/liked-dates.js').initRelations();
   return model;
 }
 

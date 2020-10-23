@@ -102,6 +102,13 @@ const getUserDates = async (email) => {
   return userDates;
 };
 
+const getLikedDates = async (email) => {
+  console.log(new Date(), 'Getting liked dates for', email);
+  const { id } = await models.users.findOne({ where: { email } });
+  const likedDates = await models.likedDates.findAll({ where: { user_id: id } });
+  return likedDates;
+};
+
 const createUserDate = async ({ email, userDate }) => {
   console.log(new Date(), 'Creating user date for', email, userDate);
   const { id } = await models.users.findOne({ where: { email } });
@@ -113,6 +120,41 @@ const createUserDate = async ({ email, userDate }) => {
     startTime: userDate.startTime,
   });
 };
+
+const likeDate = async ({ email, dateId }) => {
+  console.log(new Date(), 'Liking date', dateId, 'for user', email);
+  const { id } = await models.users.findOne({ where: { email } });
+  try {
+    const likedDate = await models.likedDates.findOne({
+      where: {
+        userId: id,
+        dateId: parseInt(dateId, 10),
+      },
+    });
+    if (likedDate) {
+      console.log('Existing liked date found - doing nothing.');
+      return null;
+    }
+  } catch (err) { console.log('No existing liked date found'); }
+  return models.likedDates.create({
+    userId: id,
+    dateId: parseInt(dateId, 10),
+  });
+};
+
+
+const unlikeDate = async ({ email, dateId }) => {
+  console.log(new Date(), 'Unliking date', dateId, 'for user', email);
+  const { id } = await models.users.findOne({ where: { email } });
+
+  return models.likedDates.destroy({
+    where: {
+      userId: id,
+      dateId: parseInt(dateId, 10),
+    },
+  });
+};
+
 
 const updateUserDate = async ({ email, userDate }) => {
   console.log(new Date(), 'Updating user date for', email, userDate);
@@ -157,8 +199,11 @@ module.exports = {
   getAllTags,
   getAllActivities,
   getUserDates,
+  getLikedDates,
   createUserDate,
   updateUserDate,
+  likeDate,
+  unlikeDate,
   deleteUserDate,
   ...adminOps(sequelize),
 };
