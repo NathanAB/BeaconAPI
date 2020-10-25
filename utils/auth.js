@@ -4,28 +4,14 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const db = require('../db');
 const constants = require('../constants');
 
-let googleConfig;
-let facebookConfig;
-
-/* eslint-disable no-underscore-dangle, camelcase */
-
-try {
-  // eslint-disable-next-line global-require
-  googleConfig = require('./google-config');
-  // eslint-disable-next-line global-require
-  facebookConfig = require('./facebook-config');
-} catch (e) {
-  console.warn(e); // eslint-disable-line no-console
-  googleConfig = {
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  };
-  facebookConfig = {
-    clientId: process.env.FACEBOOK_CLIENT_ID,
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  };
-}
-
+const googleConfig = {
+  clientId: process.env.GOOGLE_CLIENT_ID || console.error('Missing Google client id!'),
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || console.error('Missing Google client secret!'),
+};
+const facebookConfig = {
+  clientId: process.env.FACEBOOK_CLIENT_ID || console.error('Missing Facebook client id!'),
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET || console.error('Missing Facebook client secret!'),
+};
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
