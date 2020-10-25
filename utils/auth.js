@@ -56,7 +56,7 @@ module.exports = (passport) => {
     const profileData = profile._json;
     db.getOrSetUser(profileData);
     done(null, {
-      profile: profileData,
+      profile: { ...profileData, ...profile._json },
       token,
     });
   }));
@@ -67,7 +67,7 @@ module.exports = (passport) => {
     clientID: facebookConfig.clientId,
     clientSecret: facebookConfig.clientSecret,
     callbackURL: `${constants.API_URL}/login/facebook/callback`,
-    profileFields: ['id', 'emails', 'name'],
+    profileFields: ['id', 'emails', 'name', 'photos'],
   }, (token, refreshToken, profile, done) => {
     /* EXAMPLE: profile: {
       id: '116503069752664',
@@ -85,7 +85,11 @@ module.exports = (passport) => {
       }
     } */
     const { first_name, last_name, email } = profile._json;
-    const profileData = { name: `${first_name} ${last_name}`, email };
+    const picture = profile._json.picture.data.url;
+    console.log(profile._json);
+    const profileData = {
+      name: `${first_name} ${last_name}`, given_name: first_name, family_name: last_name, email, picture,
+    };
     db.getOrSetUser(profileData);
     done(null, {
       profile: profileData,

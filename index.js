@@ -3,10 +3,14 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const https = require('https');
+const fs = require('fs');
 
 const initAuth = require('./utils/auth');
 const initRoutes = require('./routes');
 const { APP_URL } = require('./constants');
+
+const isDev = process.env.NODE_ENV === 'dev';
 
 const app = express();
 
@@ -35,6 +39,18 @@ app.use(bodyParser.json());
 initRoutes(app);
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+
+
+if (isDev) {
+  const httpsOptions = {
+    key: fs.readFileSync('./certificates/localhost.key'),
+    cert: fs.readFileSync('./certificates/localhost.crt'),
+  };
+  https.createServer(httpsOptions, app).listen(port, () => {
+    console.log('Listening on https port', port);
+  });
+} else {
+  app.listen(port, () => {
+    console.log(`Listening on http port ${port}`);
+  });
+}
