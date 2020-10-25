@@ -42,17 +42,6 @@ initRoutes(app);
 
 const port = process.env.PORT || 8080;
 
-
-if (isDev) {
-  const httpsOptions = {
-    key: fs.readFileSync('./certificates/localhost.key'),
-    cert: fs.readFileSync('./certificates/localhost.crt'),
-  };
-  https.createServer(httpsOptions, app).listen(port, () => {
-    console.log('Listening on https port', port);
-  });
-} else {
-  app.listen(port, () => {
-    console.log(`Listening on http port ${port}`);
-  });
-}
+app.listen(port, () => {
+  console.log(`Listening on http port ${port}`);
+});

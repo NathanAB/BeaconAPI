@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.6.0](https://github.com/nathanab/beaconapi/compare/v1.5.0...v1.6.0)
+- Add likes api
+
 ## [v1.5.0](https://github.com/nathanab/beaconapi/compare/v1.4.0...v1.5.0)
 - Add `thumbnail` route to dynamically pull Instagram thumbnail urls. See [Facebook docs](https://developers.facebook.com/docs/plugins/oembed/) for more info.
 

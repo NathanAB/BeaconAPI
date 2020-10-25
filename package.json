@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start-local": "NODE_ENV=dev node index.js",
     "generate-models": "cd scripts && sh ./generate-models.sh",
     "deploy": "git push production master",
     "deploy-staging": "git push staging staging:master",
