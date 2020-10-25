@@ -1,13 +1,6 @@
 const Sequelize = require('sequelize');
 
-let dbUrl;
-try {
-  const dbConfig = require('./db-config.json'); // eslint-disable-line global-require
-  dbUrl = dbConfig.dbUrl; // eslint-disable-line prefer-destructuring
-} catch (e) {
-  console.warn(e); // eslint-disable-line no-console
-  dbUrl = process.env.DATABASE_URL;
-}
+const dbUrl = process.env.DATABASE_URL || console.error('Missing database url!');
 
 const models = require('./models');
 const adminOps = require('./adminOps');
