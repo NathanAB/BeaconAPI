@@ -1,8 +1,11 @@
 {
   "name": "beacon-api",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Back-end API for the Beacon web app",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node index.js",
     "start-local": "NODE_ENV=dev node index.js",
