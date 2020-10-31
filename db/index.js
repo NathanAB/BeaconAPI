@@ -8,7 +8,10 @@ const adminOps = require('./adminOps');
 const sequelize = new Sequelize(dbUrl, {
   dialect: 'postgres',
   dialectOptions: {
-    ssl: true,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
   logging: false,
 });

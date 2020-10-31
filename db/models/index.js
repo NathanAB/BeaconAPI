@@ -1,4 +1,18 @@
 /* eslint global-require: "off" */
+const Sequelize = require('sequelize');
+const activities = require('./definition/activities');
+const categories = require('./definition/categories');
+const dates = require('./definition/dates');
+const datesSections = require('./definition/dates-sections');
+const datesUsers = require('./definition/dates-users');
+const neighborhoods = require('./definition/neighborhoods');
+const sections = require('./definition/sections');
+const sectionsTags = require('./definition/sections-tags');
+const spots = require('./definition/spots');
+const tags = require('./definition/tags');
+const users = require('./definition/users');
+const likedDates = require('./definition/liked-dates');
+
 const model = {};
 let initialized = false;
 
@@ -8,21 +22,22 @@ let initialized = false;
  * @returns {Object}            - Sequelize models.
  */
 function init(sequelize) {
-  delete module.exports.init; // Destroy itself to prevent repeated calls and clash with a model named 'init'.
+  // Destroy itself to prevent repeated calls and clash with a model named 'init'.
+  delete module.exports.init;
   initialized = true;
   // Import model files and assign them to `model` object.
-  model.activities = sequelize.import('./definition/activities.js');
-  model.categories = sequelize.import('./definition/categories.js');
-  model.dates = sequelize.import('./definition/dates.js');
-  model.datesSections = sequelize.import('./definition/dates-sections.js');
-  model.datesUsers = sequelize.import('./definition/dates-users.js');
-  model.neighborhoods = sequelize.import('./definition/neighborhoods.js');
-  model.sections = sequelize.import('./definition/sections.js');
-  model.sectionsTags = sequelize.import('./definition/sections-tags.js');
-  model.spots = sequelize.import('./definition/spots.js');
-  model.tags = sequelize.import('./definition/tags.js');
-  model.users = sequelize.import('./definition/users.js');
-  model.likedDates = sequelize.import('./definition/liked-dates.js');
+  model.activities = activities(sequelize, Sequelize.DataTypes);
+  model.categories = categories(sequelize, Sequelize.DataTypes);
+  model.dates = dates(sequelize, Sequelize.DataTypes);
+  model.datesSections = datesSections(sequelize, Sequelize.DataTypes);
+  model.datesUsers = datesUsers(sequelize, Sequelize.DataTypes);
+  model.neighborhoods = neighborhoods(sequelize, Sequelize.DataTypes);
+  model.sections = sections(sequelize, Sequelize.DataTypes);
+  model.sectionsTags = sectionsTags(sequelize, Sequelize.DataTypes);
+  model.spots = spots(sequelize, Sequelize.DataTypes);
+  model.tags = tags(sequelize, Sequelize.DataTypes);
+  model.users = users(sequelize, Sequelize.DataTypes);
+  model.likedDates = likedDates(sequelize, Sequelize.DataTypes);
 
   // All models are initialized. Now connect them with relations.
   require('./definition/activities.js').initRelations();
