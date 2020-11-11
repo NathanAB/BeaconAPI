@@ -177,4 +177,50 @@ module.exports = sequelize => ({
     });
   },
 
+  deleteDatePlan: async ({ date }) => {
+    console.log(new Date(), 'Deleting date plan', date.name);
+    await sequelize.transaction(async (t) => {
+      await Promise.all(date.sections.map(async (section) => {
+        // Delete date-section
+        await models.datesSections.destroy({
+          where: {
+            sectionId: section.id,
+            dateId: date.id,
+          },
+          transaction: t,
+        });
+
+        // Update tags
+        await models.sectionsTags.destroy({
+          where: {
+            sectionId: section.id,
+          },
+        });
+
+        // Update section top-level data
+        await models.sections.destroy({
+          where: {
+            id: section.id,
+          },
+          transaction: t,
+        });
+
+        // Update spot data
+        await models.spots.destroy({
+          where: {
+            spotId: section.spot.spotId,
+          },
+          transaction: t,
+        });
+      }));
+
+      await models.dates.destroy({
+        where: {
+          id: date.id,
+        },
+        transaction: t,
+      });
+    });
+  },
+
 });

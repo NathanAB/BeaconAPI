@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.8.0](https://github.com/nathanab/beaconapi/compare/v1.7.0...v1.8.0)
+- Add delete date endpoint
+
 ## [v1.7.0](https://github.com/nathanab/beaconapi/compare/v1.6.0...v1.7.0)
 - Update to node v14
 - Update to sequelize v6

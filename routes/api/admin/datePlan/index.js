@@ -63,5 +63,20 @@ router.patch('/datePlan', validateAdmin, async (req, res) => {
   }
 });
 
+router.delete('/datePlan', validateAdmin, async (req, res) => {
+  console.log('Deleting date plan:', req.body);
+  try {
+    if (!req.body || !req.body.id) {
+      return res.sendStatus(400);
+    }
+
+    await db.deleteDatePlan({ date: req.body });
+    res.sendStatus(200);
+  } catch (err) {
+    res.sendStatus(500);
+    console.error(err);
+  }
+});
+
 
 module.exports = router;
