@@ -52,9 +52,17 @@ module.exports.initRelations = () => {
   const { datesUsers } = model;
   const { sections } = model;
   const { users } = model;
+  const { comments } = model;
 
   dates.hasMany(datesSections, {
     as: 'sectionsDateIdFkeys',
+    foreignKey: 'date_id',
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  });
+
+  dates.hasMany(comments, {
+    as: 'datesComments',
     foreignKey: 'date_id',
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',

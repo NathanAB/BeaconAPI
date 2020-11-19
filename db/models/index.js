@@ -2,6 +2,7 @@
 const Sequelize = require('sequelize');
 const activities = require('./definition/activities');
 const categories = require('./definition/categories');
+const comments = require('./definition/comments');
 const dates = require('./definition/dates');
 const datesSections = require('./definition/dates-sections');
 const datesUsers = require('./definition/dates-users');
@@ -28,6 +29,7 @@ function init(sequelize) {
   // Import model files and assign them to `model` object.
   model.activities = activities(sequelize, Sequelize.DataTypes);
   model.categories = categories(sequelize, Sequelize.DataTypes);
+  model.comments = comments(sequelize, Sequelize.DataTypes);
   model.dates = dates(sequelize, Sequelize.DataTypes);
   model.datesSections = datesSections(sequelize, Sequelize.DataTypes);
   model.datesUsers = datesUsers(sequelize, Sequelize.DataTypes);
@@ -42,6 +44,7 @@ function init(sequelize) {
   // All models are initialized. Now connect them with relations.
   require('./definition/activities.js').initRelations();
   require('./definition/categories.js').initRelations();
+  require('./definition/comments.js').initRelations();
   require('./definition/dates.js').initRelations();
   require('./definition/dates-sections.js').initRelations();
   require('./definition/dates-users.js').initRelations();

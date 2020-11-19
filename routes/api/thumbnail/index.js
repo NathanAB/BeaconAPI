@@ -8,7 +8,11 @@ const router = new Router();
 router.get('/:imageId', async (req, res) => {
   const { imageId } = req.params;
   const imageUrl = await fetchThumbnail(imageId);
-  res.json(imageUrl);
+  if (imageUrl) {
+    res.json(imageUrl);
+  } else {
+    res.sendStatus(400);
+  }
 });
 
 module.exports = router;
