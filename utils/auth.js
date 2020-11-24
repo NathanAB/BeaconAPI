@@ -1,3 +1,5 @@
+/* eslint-disable camelcase, no-underscore-dangle */
+
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -28,7 +30,7 @@ module.exports = (passport) => {
     clientSecret: googleConfig.clientSecret,
     callbackURL: `${constants.API_URL}/login/google/callback`,
   },
-  (token, refreshToken, profile, done) => {
+  async (token, refreshToken, profile, done) => {
     /* EXAMPLE: profile._json: {
       sub: '12345',
       name: 'Guy Person',
@@ -40,9 +42,9 @@ module.exports = (passport) => {
       locale: 'en'
     } */
     const profileData = profile._json;
-    db.getOrSetUser(profileData);
+    const user = await db.getOrSetUser(profileData);
     done(null, {
-      profile: { ...profileData, ...profile._json },
+      profile: { ...profileData, ...profile._json, id: user.id },
       token,
     });
   }));
@@ -54,7 +56,7 @@ module.exports = (passport) => {
     clientSecret: facebookConfig.clientSecret,
     callbackURL: `${constants.API_URL}/login/facebook/callback`,
     profileFields: ['id', 'emails', 'name', 'photos'],
-  }, (token, refreshToken, profile, done) => {
+  }, async (token, refreshToken, profile, done) => {
     /* EXAMPLE: profile: {
       id: '116503069752664',
       name: {
@@ -72,13 +74,12 @@ module.exports = (passport) => {
     } */
     const { first_name, last_name, email } = profile._json;
     const picture = profile._json.picture.data.url;
-    console.log(profile._json);
     const profileData = {
       name: `${first_name} ${last_name}`, given_name: first_name, family_name: last_name, email, picture,
     };
-    db.getOrSetUser(profileData);
+    const user = await db.getOrSetUser(profileData);
     done(null, {
-      profile: profileData,
+      profile: { ...profileData, id: user.id },
       token,
     });
   }));

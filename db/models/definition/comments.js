@@ -53,22 +53,14 @@ module.exports = (sequelize, DataTypes) => sequelize.define('comments', {
 module.exports.initRelations = () => {
   delete module.exports.initRelations; // Destroy itself to prevent repeated calls.
 
-  // const model = require('../index');
-  // const { users } = model;
-  // const { dates } = model;
-  // const { comments } = model;
+  const model = require('../index');
+  const { users } = model;
+  const { comments } = model;
 
-  // dates.hasMany(comments, {
-  //   as: 'datesComments',
-  //   foreignKey: 'date_id',
-  //   onDelete: 'NO ACTION',
-  //   onUpdate: 'NO ACTION',
-  // });
-
-  // users.belongsToMany(comments, {
-  //   as: 'dates',
-  //   foreignKey: 'user_id',
-  //   onDelete: 'NO ACTION',
-  //   onUpdate: 'NO ACTION',
-  // });
+  comments.belongsTo(users, {
+    as: 'user',
+    foreignKey: 'user_id',
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  });
 };

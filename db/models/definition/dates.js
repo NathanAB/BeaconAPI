@@ -62,7 +62,7 @@ module.exports.initRelations = () => {
   });
 
   dates.hasMany(comments, {
-    as: 'datesComments',
+    as: 'comments',
     foreignKey: 'date_id',
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',

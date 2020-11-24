@@ -12,7 +12,9 @@ const sequelize = new Sequelize(dbUrl, {
       require: true,
       rejectUnauthorized: false,
     },
+    useUTC: false, // for reading from database
   },
+  timezone: '-05:00', // for writing to database
   logging: false,
 });
 
@@ -32,7 +34,7 @@ const getOrSetUser = async ({ email, name, picture }) => {
     throw new Error('Cannot login user - provided email is empty or null', email);
   }
 
-  await models.users.findOrCreate({
+  const [user] = await models.users.findOrCreate({
     where: {
       email,
     },
@@ -42,13 +44,14 @@ const getOrSetUser = async ({ email, name, picture }) => {
   });
   await models.users.update({
     name,
-    image_url: picture,
-    last_login_at: sequelize.fn('NOW'),
+    imageUrl: picture,
+    lastLoginAt: sequelize.fn('NOW'),
   }, {
     where: {
       email,
     },
   });
+  return user;
 };
 
 const getAllDates = async () => {
@@ -56,13 +59,28 @@ const getAllDates = async () => {
     order: [
       // Make sure sections are in order
       [{ model: models.sections, as: 'sections' }, 'sectionNumber', 'ASC'],
+      [{ model: models.comments, as: 'comments' }, 'createdAt', 'DESC'],
     ],
     include: [{
       model: models.sections,
       as: 'sections',
+      attributes: [
+        'cost',
+        'createdAt',
+        'description',
+        'id',
+        'image',
+        'imageAuthor',
+        'minutes',
+        'sectionNumber',
+        'spotId',
+        'tips',
+        'updatedAt',
+      ],
       include: [{
         model: models.tags,
         as: 'tags',
+        attributes: ['name', 'tagId'],
       }, {
         model: models.spots,
         as: 'spot',
@@ -70,6 +88,15 @@ const getAllDates = async () => {
           model: models.neighborhoods,
           as: 'neighborhood',
         }],
+      }],
+    }, {
+      model: models.comments,
+      as: 'comments',
+      attributes: ['id', 'content', 'createdAt'],
+      include: [{
+        model: models.users,
+        as: 'user',
+        attributes: ['id', 'name', 'imageUrl'],
       }],
     }],
   });
@@ -138,6 +165,26 @@ const likeDate = async ({ email, dateId }) => {
   });
 };
 
+const addComment = async ({ email, dateId, content }) => {
+  console.log(new Date(), 'Adding comment for date', dateId, 'for user', email);
+  const { id } = await models.users.findOne({ where: { email } });
+  return models.comments.create({
+    userId: id,
+    dateId: parseInt(dateId, 10),
+    content,
+  });
+};
+
+const deleteComment = async ({ email, commentId }) => {
+  console.log(new Date(), 'Deleting comment with id', commentId, 'for user', email);
+  const { id } = await models.users.findOne({ where: { email } });
+  return models.comments.destroy({
+    where: {
+      userId: id,
+      id: parseInt(commentId, 10),
+    },
+  });
+};
 
 const unlikeDate = async ({ email, dateId }) => {
   console.log(new Date(), 'Unliking date', dateId, 'for user', email);
@@ -201,5 +248,7 @@ module.exports = {
   likeDate,
   unlikeDate,
   deleteUserDate,
+  addComment,
+  deleteComment,
   ...adminOps(sequelize),
 };
