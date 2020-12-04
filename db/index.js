@@ -100,6 +100,15 @@ const getAllDates = async () => {
       }],
     }],
   });
+
+  dates.forEach((date) => {
+    date.comments.map((comment) => {
+      // eslint-disable-next-line no-param-reassign
+      ([comment.user.name] = comment?.user?.name?.split(' '));
+      return comment;
+    });
+  });
+
   return dates;
 };
 
@@ -197,7 +206,6 @@ const unlikeDate = async ({ email, dateId }) => {
     },
   });
 };
-
 
 const updateUserDate = async ({ email, userDate }) => {
   console.log(new Date(), 'Updating user date for', email, userDate);
