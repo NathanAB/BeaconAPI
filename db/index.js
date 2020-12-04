@@ -14,7 +14,7 @@ const sequelize = new Sequelize(dbUrl, {
     },
     useUTC: false, // for reading from database
   },
-  timezone: '-05:00', // for writing to database
+  // timezone: '-05:00', // for writing to database
   logging: false,
 });
 
