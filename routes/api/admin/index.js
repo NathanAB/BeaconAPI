@@ -25,7 +25,7 @@ const checkAdmin = (req, res, next) => {
   next();
 };
 
-// router.use(checkAdmin);
+router.use(checkAdmin);
 router.use(datePlan);
 
 module.exports = router;

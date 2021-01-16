@@ -38,6 +38,15 @@ module.exports = (sequelize, DataTypes) => sequelize.define('dates', {
     field: 'new',
     allowNull: true,
   },
+  creator: {
+    type: DataTypes.INTEGER,
+    field: 'creator',
+    allowNull: true,
+    references: {
+      model: 'users',
+      key: 'id',
+    },
+  },
 }, {
   schema: 'public',
   tableName: 'dates',

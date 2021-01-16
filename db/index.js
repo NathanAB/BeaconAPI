@@ -117,6 +117,26 @@ const getAllTags = async () => {
   return tags;
 };
 
+const getAllUsers = async () => {
+  const users = await models.users.findAll({
+    attributes: [
+      'createdAt',
+      'name',
+      'id',
+      'imageUrl',
+      'bio',
+      'dob',
+      'relationshipStatus',
+      'favoriteNeighborhoods',
+      'secretTalent',
+      'firstDate',
+      'instagram',
+      'twitter',
+    ],
+  });
+  return users;
+};
+
 const getAllActivities = async () => {
   const activities = await models.activities.findAll();
   return activities;
@@ -248,6 +268,7 @@ module.exports = {
   getAllDates,
   getAllNeighborhoods,
   getAllTags,
+  getAllUsers,
   getAllActivities,
   getUserDates,
   getLikedDates,

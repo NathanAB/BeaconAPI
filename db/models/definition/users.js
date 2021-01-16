@@ -43,6 +43,46 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'updated_at',
     allowNull: true,
   },
+  bio: {
+    type: DataTypes.TEXT,
+    field: 'bio',
+    allowNull: true,
+  },
+  dob: {
+    type: DataTypes.DATE,
+    field: 'dob',
+    allowNull: true,
+  },
+  relationshipStatus: {
+    type: DataTypes.TEXT,
+    field: 'relationship_status',
+    allowNull: true,
+  },
+  favoriteNeighborhoods: {
+    type: DataTypes.TEXT,
+    field: 'favorite_neighborhoods',
+    allowNull: true,
+  },
+  secretTalent: {
+    type: DataTypes.TEXT,
+    field: 'secret_talent',
+    allowNull: true,
+  },
+  firstDate: {
+    type: DataTypes.TEXT,
+    field: 'first_date',
+    allowNull: true,
+  },
+  instagram: {
+    type: DataTypes.TEXT,
+    field: 'instagram',
+    allowNull: true,
+  },
+  twitter: {
+    type: DataTypes.TEXT,
+    field: 'twitter',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'users',

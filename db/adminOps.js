@@ -44,7 +44,7 @@ date: {
 
 const genId = () => Math.round(Math.random() * 2147483646);
 
-module.exports = sequelize => ({
+module.exports = (sequelize) => ({
 
   createDatePlan: async ({ date }) => {
     console.log(new Date(), 'Creating new date plan named', date.name);
@@ -59,6 +59,7 @@ module.exports = sequelize => ({
       const newDate = await models.dates.create({
         id: genId(),
         name: date.name,
+        creator: date.creator,
         description: date.description,
         active: false,
         new: false,
@@ -117,6 +118,7 @@ module.exports = sequelize => ({
     await sequelize.transaction(async (t) => {
       await models.dates.update({
         name: date.name,
+        creator: date.creator,
         description: date.description,
         active: date.active,
         new: date.new,
@@ -146,13 +148,13 @@ module.exports = sequelize => ({
         });
 
         // Update tags
-        const tagIds = section.tags.map(tag => tag.tagId);
+        const tagIds = section.tags.map((tag) => tag.tagId);
         await models.sectionsTags.destroy({
           where: {
             sectionId: section.id,
           },
         });
-        await Promise.all(tagIds.map(tagId => models.sectionsTags.create({
+        await Promise.all(tagIds.map((tagId) => models.sectionsTags.create({
           id: genId(),
           tagId,
           sectionId: section.id,
@@ -160,7 +162,6 @@ module.exports = sequelize => ({
 
           transaction: t,
         })));
-
 
         // Update spot data
         await models.spots.update({
