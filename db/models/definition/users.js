@@ -83,6 +83,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'twitter',
     allowNull: true,
   },
+  isCreator: {
+    type: DataTypes.BOOLEAN,
+    field: 'is_creator',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'users',

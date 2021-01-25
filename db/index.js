@@ -133,6 +133,9 @@ const getAllUsers = async () => {
       'instagram',
       'twitter',
     ],
+    where: {
+      isCreator: true,
+    },
   });
   return users;
 };
