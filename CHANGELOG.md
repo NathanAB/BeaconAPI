@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.10.0](https://github.com/nathanab/beaconapi/compare/v1.9.0...v1.10.0)
+- Add user api
+- Add user profile fields and date creator field
+
 ## [v1.9.0](https://github.com/nathanab/beaconapi/compare/v1.8.0...v1.9.0)
 - Add comments API
 - Add redirect url option for login
