@@ -132,6 +132,7 @@ const getAllUsers = async () => {
       'firstDate',
       'instagram',
       'twitter',
+      'isNew',
     ],
     where: {
       isCreator: true,

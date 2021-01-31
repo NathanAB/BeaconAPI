@@ -88,6 +88,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'is_creator',
     allowNull: true,
   },
+  isNew: {
+    type: DataTypes.BOOLEAN,
+    field: 'is_new',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'users',
