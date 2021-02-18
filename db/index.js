@@ -128,6 +128,7 @@ const getAllUsers = async () => {
       'dob',
       'relationshipStatus',
       'favoriteNeighborhoods',
+      'dateSpecialties',
       'secretTalent',
       'firstDate',
       'instagram',
@@ -139,6 +140,15 @@ const getAllUsers = async () => {
     },
   });
   return users;
+};
+
+const getCurrentUser = async (email) => {
+  const user = await models.users.findOne({
+    where: {
+      email,
+    },
+  });
+  return user;
 };
 
 const getAllActivities = async () => {
@@ -273,6 +283,7 @@ module.exports = {
   getAllNeighborhoods,
   getAllTags,
   getAllUsers,
+  getCurrentUser,
   getAllActivities,
   getUserDates,
   getLikedDates,

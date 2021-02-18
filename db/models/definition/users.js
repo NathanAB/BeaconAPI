@@ -58,6 +58,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'relationship_status',
     allowNull: true,
   },
+  dateSpecialties: {
+    type: DataTypes.TEXT,
+    field: 'date_specialties',
+    allowNull: true,
+  },
   favoriteNeighborhoods: {
     type: DataTypes.TEXT,
     field: 'favorite_neighborhoods',
