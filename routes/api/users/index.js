@@ -22,10 +22,19 @@ router.patch('/', async (req, res) => {
 
   try {
     const { email } = req.session.passport.user.profile;
-    const userData = req.body;
-    delete userData.isNew;
-    delete userData.isCreator;
-    delete userData.id;
+    let userData = req.body;
+    userData = {
+      bio: userData.bio,
+      dob: userData.dob,
+      relationshipStatus: userData.relationshipStatus,
+      favoriteNeighborhoods: userData.favoriteNeighborhoods,
+      secretTalent: userData.secretTalent,
+      firstDate: userData.firstDate,
+      instagram: userData.instagram,
+      twitter: userData.twitter,
+      dateSpecialties: userData.dateSpecialties,
+      hideLastName: userData.hideLastName,
+    };
     const savedData = await db.updateUser({ email, userData });
     res.status(200);
     res.json(savedData);

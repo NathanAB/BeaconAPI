@@ -5,6 +5,15 @@ const dbUrl = process.env.DATABASE_URL || console.error('Missing database url!')
 const models = require('./models');
 const adminOps = require('./adminOps');
 
+const hideLastName = (user) => {
+  if (user.hideLastName) {
+    const [first, last] = user.name.split(' ');
+    if (last) {
+      user.name = `${first} ${last[0]}.`;
+    }
+  }
+};
+
 const sequelize = new Sequelize(dbUrl, {
   dialect: 'postgres',
   dialectOptions: {
@@ -134,11 +143,13 @@ const getAllUsers = async () => {
       'instagram',
       'twitter',
       'isNew',
+      'hideLastName',
     ],
     where: {
       isCreator: true,
     },
   });
+  users.forEach(hideLastName);
   return users;
 };
 
@@ -148,6 +159,7 @@ const getCurrentUser = async (email) => {
       email,
     },
   });
+  hideLastName(user);
   return user;
 };
 

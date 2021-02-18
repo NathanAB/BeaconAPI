@@ -98,6 +98,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'is_new',
     allowNull: true,
   },
+  hideLastName: {
+    type: DataTypes.BOOLEAN,
+    field: 'hide_last_name',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'users',
