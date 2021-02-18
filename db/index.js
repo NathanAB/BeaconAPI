@@ -151,6 +151,17 @@ const getCurrentUser = async (email) => {
   return user;
 };
 
+const updateUser = async ({ email, userData }) => {
+  console.log(new Date(), 'Updating user data for', email, userData);
+  const currentUserData = await models.users.findOne({ where: { email } });
+
+  return models.users.update(userData, {
+    where: {
+      id: currentUserData.id,
+    },
+  });
+};
+
 const getAllActivities = async () => {
   const activities = await models.activities.findAll();
   return activities;
@@ -284,6 +295,7 @@ module.exports = {
   getAllTags,
   getAllUsers,
   getCurrentUser,
+  updateUser,
   getAllActivities,
   getUserDates,
   getLikedDates,
