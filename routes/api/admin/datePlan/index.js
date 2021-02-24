@@ -78,5 +78,4 @@ router.delete('/datePlan', validateAdmin, async (req, res) => {
   }
 });
 
-
 module.exports = router;

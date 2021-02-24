@@ -38,6 +38,15 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+const getUser = async (email) => {
+  const user = await models.users.findOne({
+    where: {
+      email,
+    },
+  });
+  return user;
+};
+
 const getOrSetUser = async ({ email, name, picture }) => {
   if (!email) {
     throw new Error('Cannot login user - provided email is empty or null', email);
@@ -62,6 +71,12 @@ const getOrSetUser = async ({ email, name, picture }) => {
   });
   return user;
 };
+
+const getDate = async (id) => models.dates.findOne({
+  where: {
+    id,
+  },
+});
 
 const getAllDates = async () => {
   const dates = await models.dates.findAll({
@@ -301,7 +316,9 @@ const deleteUserDate = async ({ email, userDate }) => {
 };
 
 module.exports = {
+  getUser,
   getOrSetUser,
+  getDate,
   getAllDates,
   getAllNeighborhoods,
   getAllTags,
