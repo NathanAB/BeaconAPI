@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.12.0](https://github.com/nathanab/beaconapi/compare/v1.11.0...v1.12.0)
+- Add profile API
+- Add user date management API
+
 ## [v1.11.0](https://github.com/nathanab/beaconapi/compare/v1.10.0...v1.11.0)
 - Add isNew field to user data
 
