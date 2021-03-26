@@ -5,33 +5,7 @@ const { ADMINS } = require('../utils');
 
 const router = new Router();
 
-const validateAdmin = (req, res, next) => {
-  if (!req.session || !req.session.passport || !req.session.passport.user) {
-    console.error('Missing auth data attempting to execute admin action');
-    res.sendStatus(401);
-    return;
-  }
-
-  const { email } = req.session.passport.user.profile;
-
-  if (!ADMINS.includes(email)) {
-    console.error(`Non-admin ${email} is attempting to execute admin action!`);
-    res.sendStatus(403);
-    return;
-  }
-
-  console.log(`Admin ${email} is executing an admin action`);
-
-  if (!req.session.token) {
-    res.cookie('token', '');
-    res.sendStatus(401);
-    return;
-  }
-
-  next();
-};
-
-router.post('/datePlan', validateAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
   console.log('Creating new date plan:', req.body);
   try {
     if (!req.body || !req.body.name || !req.body.description
@@ -48,7 +22,7 @@ router.post('/datePlan', validateAdmin, async (req, res) => {
   }
 });
 
-router.patch('/datePlan', validateAdmin, async (req, res) => {
+router.patch('/', async (req, res) => {
   console.log('Patching date plan:', req.body);
   try {
     if (!req.body || !req.body.name || !req.body.description) {
@@ -63,7 +37,7 @@ router.patch('/datePlan', validateAdmin, async (req, res) => {
   }
 });
 
-router.delete('/datePlan', validateAdmin, async (req, res) => {
+router.delete('/', async (req, res) => {
   console.log('Deleting date plan:', req.body);
   try {
     if (!req.body || !req.body.id) {

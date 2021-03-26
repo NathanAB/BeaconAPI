@@ -5,14 +5,10 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const https = require('https');
-const fs = require('fs');
 
 const initAuth = require('./utils/auth');
 const initRoutes = require('./routes');
 const { APP_URL } = require('./constants');
-
-const isDev = process.env.NODE_ENV === 'dev';
 
 const app = express();
 

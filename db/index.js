@@ -168,6 +168,11 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getAllUsersAdmin = async () => {
+  const users = await models.users.findAll();
+  return users;
+};
+
 const getCurrentUser = async (email) => {
   const user = await models.users.findOne({
     where: {
@@ -323,6 +328,7 @@ module.exports = {
   getAllNeighborhoods,
   getAllTags,
   getAllUsers,
+  getAllUsersAdmin,
   getCurrentUser,
   updateUser,
   getAllActivities,
