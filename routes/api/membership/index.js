@@ -1,5 +1,6 @@
 const Router = require('express-promise-router');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+const moment = require('moment');
 
 const { APP_URL } = require('../../../constants');
 const db = require('../../../db');
@@ -48,7 +49,7 @@ router.post('/webhook', async (req, res) => {
   const event = req.body;
   const { data, type } = event;
   const { customer_email } = data.object;
-  const periodEnd = data.object.lines.data[0].period.end;
+  const periodEnd = data?.object?.lines?.data[0]?.period?.end;
 
   console.log(`Stripe even received event type: ${type}`);
 
