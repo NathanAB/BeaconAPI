@@ -9,6 +9,7 @@ const likedDates = require('./api/likedDates');
 const thumbnail = require('./api/thumbnail');
 const comments = require('./api/comments');
 const users = require('./api/users');
+const membership = require('./api/membership');
 const login = require('./login');
 const logout = require('./logout');
 
@@ -23,7 +24,8 @@ module.exports = (app) => {
   app.use('/api/thumbnail', thumbnail);
   app.use('/api/comments', comments);
   app.use('/api/users', users);
+  app.use('/api/membership', membership);
+  app.use('/api/admin', adminRouter);
   app.use('/login', login);
   app.use('/logout', logout);
-  app.use('/api/admin', adminRouter);
 };

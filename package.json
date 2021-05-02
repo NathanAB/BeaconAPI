@@ -15,7 +15,8 @@
     "deploy-current-branch-to-staging": "git push staging HEAD:master",
     "migrate-staging-to-production": "heroku pg:copy beacon-dates-api-staging::DATABASE_URL DATABASE_URL --app beacon-dates-api",
     "migrate-production-to-staging": "heroku pg:copy beacon-dates-api::DATABASE_URL DATABASE_URL --app beacon-dates-api-staging",
-    "test": "jest"
+    "test": "jest",
+    "stripe-listen": "stripe listen --forward-to http://local.beacondates.com:8080/api/membership/webhook"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.5",
+    "stripe": "^8.144.0",
     "uuid": "^3.4.0"
   },
   "devDependencies": {

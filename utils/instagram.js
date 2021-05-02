@@ -6,7 +6,7 @@ const fb = {
 };
 
 const fetchThumbnail = async (imageId) => {
-  const url = `https://graph.facebook.com/instagram_oembed?url=https://www.instagram.com/p/${imageId}/&access_token=${fb.id}|${fb.secret}&fields=thumbnail_url`;
+  const url = `https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${imageId}/&access_token=${fb.id}|${fb.secret}&fields=thumbnail_url`;
   const res = await fetch(url);
   const json = await res.json();
   const imageUrl = json.thumbnail_url;

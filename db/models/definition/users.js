@@ -103,6 +103,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'hide_last_name',
     allowNull: true,
   },
+  membershipEnd: {
+    type: DataTypes.DATE,
+    field: 'membership_end',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'users',

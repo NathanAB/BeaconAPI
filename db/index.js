@@ -320,6 +320,16 @@ const deleteUserDate = async ({ email, userDate }) => {
   });
 };
 
+const setMembershipEnd = async ({ email, newEndDate }) => {
+  await models.users.update({
+    membershipEnd: newEndDate,
+  }, {
+    where: {
+      email,
+    },
+  });
+};
+
 module.exports = {
   getUser,
   getOrSetUser,
@@ -341,5 +351,6 @@ module.exports = {
   deleteUserDate,
   addComment,
   deleteComment,
+  setMembershipEnd,
   ...adminOps(sequelize),
 };
