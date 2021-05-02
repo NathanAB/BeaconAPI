@@ -47,11 +47,10 @@ router.post('/checkout', async (req, res) => {
 router.post('/webhook', async (req, res) => {
   const event = req.body;
   const { data, type } = event;
-  const { period_end, customer_email } = data.object;
+  const { customer_email } = data.object;
+  const periodEnd = data.object.lines.data[0].period.end;
 
   console.log(`Stripe even received event type: ${type}`);
-  console.log(`Event: ${event}`);
-  console.log(`Event data: ${data}`);
 
   switch (event.type) {
     case 'checkout.session.completed':
@@ -66,8 +65,8 @@ router.post('/webhook', async (req, res) => {
       // This approach helps you avoid hitting rate limits.
 
       // TODO: Update membership end date for user
-      console.log(`Updating membership for ${customer_email} with end date ${period_end}`);
-      await db.setMembershipEnd({ email: customer_email, newEndDate: period_end });
+      console.log(`Updating membership for ${customer_email} with end date ${periodEnd}`);
+      await db.setMembershipEnd({ email: customer_email, newEndDate: periodEnd });
       break;
     case 'invoice.payment_failed':
       // The payment failed or the customer does not have a valid payment method.
