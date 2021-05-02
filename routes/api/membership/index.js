@@ -47,7 +47,7 @@ router.post('/checkout', async (req, res) => {
 router.post('/webhook', async (req, res) => {
   const event = req.body;
   const { data, type } = event;
-  const { period_end, customer_email } = data;
+  const { period_end, customer_email } = data.object;
 
   console.log(`Stripe even received event type: ${type}`);
   console.log(`Event: ${event}`);
