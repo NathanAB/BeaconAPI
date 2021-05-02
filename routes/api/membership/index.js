@@ -67,7 +67,7 @@ router.post('/webhook', async (req, res) => {
 
       // TODO: Update membership end date for user
       console.log(`Updating membership for ${customer_email} with end date ${periodEnd}`);
-      await db.setMembershipEnd({ email: customer_email, newEndDate: periodEnd });
+      await db.setMembershipEnd({ email: customer_email, newEndDate: periodEnd * 1000 });
       break;
     case 'invoice.payment_failed':
       // The payment failed or the customer does not have a valid payment method.
