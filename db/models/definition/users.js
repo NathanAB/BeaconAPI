@@ -108,6 +108,11 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
     field: 'membership_end',
     allowNull: true,
   },
+  customerId: {
+    type: DataTypes.TEXT,
+    field: 'customer_id',
+    allowNull: true,
+  },
 }, {
   schema: 'public',
   tableName: 'users',
