@@ -90,12 +90,12 @@ router.post('/portal', async (req, res) => {
 
   const { email } = req.session.passport.user.profile;
 
-  const { customerId } = db.getUser(email);
+  const { customerId } = await db.getUser(email);
 
   // Authenticate your user.
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
-    return_url: 'https://beacondates.com/membership',
+    return_url: `${APP_URL}/membership`,
   });
 
   res.json({ url: session.url });
