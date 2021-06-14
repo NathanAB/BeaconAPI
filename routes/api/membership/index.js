@@ -30,6 +30,7 @@ router.post('/checkout', async (req, res) => {
       ],
       success_url: `${APP_URL}/membership?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${APP_URL}/membership`,
+      allow_promotion_codes: true,
     });
 
     res.send({
