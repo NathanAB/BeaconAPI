@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.14.0](https://github.com/nathanab/beaconapi/compare/v1.13.0...v1.14.0)
+- Added Stripe integration and payments support
+
 ## [v1.13.0](https://github.com/nathanab/beaconapi/compare/v1.12.0...v1.13.0)
 - Add admin route to pull and patch all user data
 
